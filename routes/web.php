@@ -1,102 +1,88 @@
 <?php
  
+ 
+Route::get('/', 'ApplicantController@index');
 
 
 
- Route::middleware(['RINA'])->group(function () {
+
+Route::middleware(['RINU'])->group(function () {
   
 
- 
+	Route::get('/profile1', function () { return view('profile1'); })->name('profile1');
+	Route::get('/profile2', function () { return view('profile2'); })->name('profile2');
+	Route::get('/profile3', function () { return view('profile3'); })->name('profile3');
+	Route::get('/profile4', function () { return view('profile4'); })->name('profile4');
 
-Route::get('/client','ClientController@index');
-Route::get('/client/create','ClientController@create');
-Route::get('/client/{id}/edit','ClientController@edit');
-Route::get('/client/show/{id}','ClientController@show');
-Route::get('/client/search{search?}','ClientController@search')->where('search', '.*');
-Route::get('/client/details/{id}','ClientController@details');
-Route::POST('/client','ClientController@store');
-Route::POST('/client/update/{id}','ClientController@update');
-Route::POST('/client/destroy','ClientController@destroy');
+	Route::get('/myjobs', function () { return view('myjobs'); })->name('myjobs');
+	Route::get('/favourite', function () { return view('favourite'); })->name('favourite');
 
 
 
-Route::get('/emp','EmpController@index');
-Route::get('/emp/create','EmpController@create');
-Route::get('/emp/{id}/edit','EmpController@edit');
-Route::get('/emp/show/{id}','EmpController@show');
-Route::get('/emp/search{search?}','EmpController@search')->where('search', '.*');
-Route::POST('/emp','EmpController@store');
-Route::POST('/emp/update/{id}','EmpController@update');
-Route::POST('/emp/destroy','EmpController@destroy');
+	Route::post('/profile1','ApplicantController@profile1')->name('post_profile1');
+	Route::post('/profile2','ApplicantController@profile2')->name('post_profile2');
+	Route::post('/profile3','ApplicantController@profile3')->name('post_profile3');
+	Route::post('/profile4','ApplicantController@profile4')->name('post_profile4');
+	Route::post('/updatelove','ApplicantController@updatelove')->name('post_updatelove');
+	Route::post('/appling','ApplicantController@appling')->name('post_appling');
 
 
 
-Route::get('/deal','DealController@index');
-Route::get('/deal/create','DealController@create');
-Route::get('/deal/{id}/edit','DealController@edit');
-Route::get('/deal/show/{id}','DealController@show');
-Route::get('/deal/search{search?}','DealController@search')->where('search', '.*');
-
-Route::POST('/deal','DealController@store');
-Route::POST('/deal/update/{id}','DealController@update');
-Route::POST('/deal/destroy','DealController@destroy');
 
 
-/*Route::POST('/getclients','DealController@getclientsfordeal');
-*/
-
- 
-Route::get('/message','MessageController@index');
-Route::get('/message/show/{id}','MessageController@show');
-Route::get('/message/search{search?}','MessageController@search')->where('search', '.*');
-Route::get('/message/create','MessageController@create');
-Route::POST('/message','MessageController@send_message');
-Route::POST('/sendmessage','MessageController@send_message');
-Route::POST('/message/destroy','MessageController@destroy');
+	/*dashboard*/
+	Route::get('/dashboard','AdminController@dashboard')->name('dashboard');
+	/*end dashboard*/
 
 
 
- 
-	Route::get('/', function () {
-	    return view('welcome');
-	});
- 
-
-
-	
-	Route::POST('/getClientsMsgs','MessageController@getClientsMsgs');
-	Route::POST('/getEmpsMsgs','MessageController@getEmpsMsgs');
-	Route::POST('/total_borrow_payback','MessageController@total_borrow_payback');
+	/*applicants*/
+	Route::get('/dashboard/applicants','AdminController@applicants')->name('applicants');
+	/*end applicants*/
 
 
 
- 
- 
+	/*admin user*/
+	Route::get('/dashboard/user','AdminController@userIndex')->name('users');
+	Route::get('/dashboard/user/search{search?}','AdminController@search')->where('search', '.*');
 
+	Route::get('/dashboard/user/{id}/show','AdminController@userShow');
+	Route::get('/dashboard/user/update','AdminController@update');
+	/*end admin user*/
+
+
+
+	/*job*/
+	Route::get('/dashboard/job/create','AdminController@createJob');
+	Route::post('/dashboard/job/create','AdminController@createJobStore');
+	Route::get('/dashboard/job','AdminController@indexJob');
+	/*end job*/
+
+
+	/*job option*/
+	Route::get('/dashboard/joboption','AdminController@indexJobOption');
+	Route::get('/dashboard/joboption/create','AdminController@createJobOption');
+	Route::post('/dashboard/joboption/create','AdminController@createJobOptionStore');
+	/*end job option*/
+
+	 
 }); 
 
 
  
+
+
+ 
 Auth::routes();
 
-Route::get('/register', function(){
+/*Route::get('/register', function(){
 	return redirect('/login');
 });
 Route::POST('/register', function(){
 	return redirect('/login');
-});
-
-Route::get('/schadual_run_command_test','NotificationController@schadual_run_command');
-Route::get('/track/{id?}', 'ClientController@track')->name('track');
-
-
+});*/
 
  
 
-/*
-Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-*/
+ 
